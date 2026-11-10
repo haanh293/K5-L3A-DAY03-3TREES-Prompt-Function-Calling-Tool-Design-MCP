@@ -118,10 +118,10 @@ Only fill if your team did bonus.
 
 | Bonus | Evidence File | What Worked | Risk / Guardrail |
 |---|---|---|---|
-| send (Telegram) |  |  |  |
-| arXiv/company policy |  |  |  |
-| UI |  |  |  |
-| Tool unit tests (`tests/`) | `pytest` output |  |  |
+| send (Telegram) |tests/test_tools_todo.py, artifacts/tools.yaml  |Thiết lập cờ confirmed=true. Khi người dùng chưa xác nhận, agent từ chối gửi hoặc gọi clarify xin phép.  |	Ngăn chặn agent tự ý phát tán thông tin giả hoặc tin rác ra kênh công cộng khi chưa có kiểm duyệt.  |
+| arXiv/company policy |	tools/papers/, tools/paper_text/, tools/policy/  |Tích hợp thành công cổng tìm kiếm học thuật arXiv và tra cứu markdown chính sách nội bộ theo chuyên mục data_privacy.  |Lọc dữ liệu thô từ văn bản, ngăn prompt injection từ nội dung bên ngoài thông qua phân tách vùng dữ liệu tin cậy. |
+| UI |app.py, link Streamlit  |	Giao diện hiện đại có Logo nhận diện nhóm 3TREES, kết quả tool hiển thị hoàn toàn dưới dạng Card trực quan (không lộ JSON thô), tích hợp nút bấm câu hỏi mẫu 1-click.  |Đem lại trải nghiệm thân thiện cho người dùng thông thường; xử lý lỗi mềm mượt khi thiếu API key.  |
+| Tool unit tests (`tests/`) | pytest output: 108 passed in 0.33s |Đạt 108/108 bài kiểm thử xanh toàn diện (bao gồm kiểm thử hợp đồng schema contract, mock network offline với fake_http, xử lý input biên).  |Unit test kiểm tra tính đúng đắn của mã nguồn tool (vd: chia cho 0, danh sách rỗng, kiểu dữ liệu sai) – điều mà eval routing không kiểm tra được.  |
 
 Tool unit tests: số test đã viết, số bug tìm được trong tool có sẵn (nếu có), và một ví dụ lỗi mà unit test bắt được nhưng eval không bắt được.
 
